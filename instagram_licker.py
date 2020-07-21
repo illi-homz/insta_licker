@@ -16,7 +16,7 @@ class SeeStorris:
         self.user_password = password
         self.client_url = user_url
         self.folowers_url_list = []
-        self.how_much_need_to_see = 250 # сколько нужно посмотреть за сессию
+        self.how_much_need_to_see = 120 # сколько нужно посмотреть за сессию
         self.complete_folowers_list = []
         self.added_to_base = 0
         self.need_count_folowers = 0
@@ -45,8 +45,8 @@ class SeeStorris:
             if not self.folowers_url_list:
                 self.browser.get(self.client_url)
                 time.sleep(3)
-                # self.need_count_folowers = self.get_count_folowers() # для всех подписчиков
-                self.need_count_folowers = 500
+                self.need_count_folowers = self.get_count_folowers() # для всех подписчиков
+                # self.need_count_folowers = 500
                 print(f'Подписчиков на странице - {self.need_count_folowers}')
                 self.open_list_folowers()
                 time.sleep(2)
@@ -225,6 +225,15 @@ class SeeStorris:
         max_like_in_hour = randint(55, 59)
 
         for url in self.folowers_url_list:
+
+            # Проверка на наличие ошибки на странице
+            try:
+                self.browser.find_element_by_class_name('error-container')
+                print('Ошибка на странице')
+                self.browser.close()
+            except:
+                pass
+
             # закончить при просмотре необходимого числа аккаунтов
             if self.liked_folowers == self.how_much_need_to_see:
                 break
@@ -276,9 +285,11 @@ class SeeStorris:
             self.find_photos = True
             end_photo = photos_on_page[0]
             end_photo.click()
-            time.sleep(2)
+            time.sleep(3)
+
             mini_elements = self.browser.find_elements_by_class_name('wpO6b')
-            button_like = mini_elements[1]
+            button_like = mini_elements[2]
+
             button_like.click()
 
             self.liked_folowers += 1
@@ -290,9 +301,7 @@ class SeeStorris:
 if __name__ == '__main__':
     user_login = 'nastya_pro_sugaring'
     user_password = 'fufik123567chupa'
-    client_url = 'https://instagram.com/smile_shugar'
-    # client_url = 'https://instagram.com/sugaring_vladikavkaz_anya/'
-    # client_url = 'https://instagram.com/sweet_studio_vld/'
+    client_url = 'https://www.instagram.com/nelli_cosmo/'
 
     # user_login = 'illi_homz'
     # user_password = 'badbalance166998'
