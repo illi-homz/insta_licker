@@ -231,6 +231,8 @@ class SeeStorris:
                 time.sleep(60 * 30)
                 # self.browser.close()
                 # return
+            else:
+                print('Не опасна')
         except:
             pass
 
