@@ -212,6 +212,27 @@ class SeeStorris:
         except:
             self.find_stories = False
             return
+    
+    def check_on_error_on_page(self):
+        """
+            Проверяется наличие ошибки с заголовком 'Ошибка'
+            и текстом 'Подождите несколько минут, прежде чем пытаться снова.'
+        """
+        try:
+            error_container = self.browser.find_element_by_class_name('error-container')
+            print('Вижу ошибку, проверяю опасна ли она')
+            error_title = error_container.find_element_by_tag_name('h2')
+            error_body = error_container.find_element_by_tag_name('p')
+            if (
+                error_title == 'Ошибка' and
+                error_body == 'Подождите несколько минут, прежде чем пытаться снова.'
+            ):
+                print('Ошибка на странице, жду 30 сек.')
+                time.sleep(60 * 30)
+                # self.browser.close()
+                # return
+        except:
+            pass
 
     def start_see_storris(self):
         print('Пошла жара')
@@ -225,14 +246,8 @@ class SeeStorris:
         max_like_in_hour = randint(55, 59)
 
         for url in self.folowers_url_list:
-
             # Проверка на наличие ошибки на странице
-            try:
-                self.browser.find_element_by_class_name('error-container')
-                print('Ошибка на странице')
-                self.browser.close()
-            except:
-                pass
+            self.check_on_error_on_page()
 
             # закончить при просмотре необходимого числа аккаунтов
             if self.liked_folowers == self.how_much_need_to_see:
