@@ -83,7 +83,7 @@ class SeeStorris:
             return False
         except NoSuchElementException:
             return True
-    
+
     def no_complet_controll(self):
         no_complete_urls = self.session.query(
                 db.CompleteFolower
@@ -108,11 +108,11 @@ class SeeStorris:
         self.link_on_folowers = self.browser.find_element_by_xpath(
             '//section/main/div/header/section/ul/li[2]/a'
         ).click()
-    
+
     def get_element(self):
         # return self.browser.find_element_by_xpath('/html/body/div[4]/div/div[2]')
         return self.browser.find_element_by_class_name('isgrP')
-    
+
     def scroll(self, heigth=1):
         self.browser.execute_script(f'arguments[0].scrollTop = arguments[0].scrollHeight/{heigth}', self.element)
 
@@ -168,7 +168,7 @@ class SeeStorris:
         map(self.scroll, heigth_list)
 
         # all_complete = len(self.folowers_url_list) + self.complete_folowers_list
-        
+
         while len(self.folowers_url_list) + len(self.complete_folowers_list) < self.need_count_folowers:
 
             num_scroll += 1
@@ -212,7 +212,7 @@ class SeeStorris:
         except:
             self.find_stories = False
             return
-    
+
     def check_on_error_on_page(self):
         """
             Проверяется наличие ошибки с заголовком 'Ошибка'
@@ -295,7 +295,7 @@ class SeeStorris:
                     print('Ожидание 0 с')
 
             max_f += 1
-    
+
     def like_end_photo(self):
         try:
             photos_on_page = self.browser.find_elements_by_class_name('eLAPa')
