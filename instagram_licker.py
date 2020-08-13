@@ -66,15 +66,23 @@ class SeeStorris:
         # Вход в аккаунт
         self.browser.get('https://instagram.com/accounts/login')
         time.sleep(4)
+        # self.browser.find_element_by_xpath(
+        #     '//section/main/div/article/div/div[1]/div/form/div[2]/div/label/input'
+        # ).send_keys(self.user_login)
         self.browser.find_element_by_xpath(
-            '//section/main/div/article/div/div[1]/div/form/div[2]/div/label/input'
+            '/html/body/div[1]/section/main/div/article/div/div[1]/div/form/div/div[1]/div/label/input'
         ).send_keys(self.user_login)
         self.browser.find_element_by_xpath(
-            '//section/main/div/article/div/div[1]/div/form/div[3]/div/label/input'
+            '/html/body/div[1]/section/main/div/article/div/div[1]/div/form/div/div[2]/div/label/input'
         ).send_keys(self.user_password)
         self.browser.find_element_by_xpath(
-            '//section/main/div/article/div/div[1]/div/form/div[4]/button'
+            '/html/body/div[1]/section/main/div/article/div/div[1]/div/form/div/div[3]/button'
         ).click()
+
+        # /html/body/div[1]/section/main/div/article/div/div[1]/div/form/div/div[1]/div/label/input
+
+        # //*[@id="loginForm"]/div/div[1]/div/label/input
+        # //*[@id="loginForm"]/div/div[2]/div/label/input
 
         time.sleep(2)
 
@@ -317,7 +325,7 @@ class SeeStorris:
 
 if __name__ == '__main__':
     user_login = 'nastya_pro_sugaring'
-    user_password = 'fufik123567chupa'
+    user_password = 'fufik123567chupachups'
     client_url = 'https://www.instagram.com/nelli_cosmo/'
 
     # user_login = 'illi_homz'
