@@ -3,6 +3,7 @@ from selenium.common.exceptions import NoSuchElementException
 import time
 import os
 from exeptions import NoLogin, BadURL
+import json
 
 import db_objects as db
 
@@ -25,6 +26,8 @@ class SeeStorris:
         self.browser = webdriver.Chrome(
             self.BASE_DIR + '/browser_drivers/chromedriver'
         )
+        self.need_cookies = ['sessionid', 'ds_user_id', 'mid', 'ig_did']
+        self.cookies = {}
 
         # db work
         self.session = db.connect_db(db.DB_PATH)
@@ -66,9 +69,16 @@ class SeeStorris:
         # Вход в аккаунт
         self.browser.get('https://instagram.com/accounts/login')
         time.sleep(4)
-        # self.browser.find_element_by_xpath(
-        #     '//section/main/div/article/div/div[1]/div/form/div[2]/div/label/input'
-        # ).send_keys(self.user_login)
+
+        # Read cookis from file
+        try:
+            with open(f'cookies/{self.user_login}_cookies') as file:
+                self.cookies = json.load(file)
+            for cook in self.need_cookies:
+                self.browser.add_cookie({'name': cook, 'value': cookies[cook]})
+        except:
+            pass
+
         self.browser.find_element_by_xpath(
             '/html/body/div[1]/section/main/div/article/div/div[1]/div/form/div/div[1]/div/label/input'
         ).send_keys(self.user_login)
@@ -79,12 +89,14 @@ class SeeStorris:
             '/html/body/div[1]/section/main/div/article/div/div[1]/div/form/div/div[3]/button'
         ).click()
 
-        # /html/body/div[1]/section/main/div/article/div/div[1]/div/form/div/div[1]/div/label/input
+        time.sleep(4)
 
-        # //*[@id="loginForm"]/div/div[1]/div/label/input
-        # //*[@id="loginForm"]/div/div[2]/div/label/input
-
-        time.sleep(2)
+        # Write cookies
+        self.cookies = {}
+        for cookie in self.need_cookies:
+            self.cookies[cookie] = self.browser.get_cookie(cookie)['value']
+        with open(f'cookies/{self.user_login}_cookies', 'w') as file:
+            json.dump(self.cookies, file)
 
         try:
             self.browser.find_element_by_class_name('eiCW-')
