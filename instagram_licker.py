@@ -73,23 +73,33 @@ class SeeStorris:
         time.sleep(4)
 
         # Read cookis from file
-        try:
-            with open(f'cookies/{self.user_login}_cookies') as file:
-                self.cookies = json.load(file)
-            for cook in self.need_cookies:
-                self.browser.add_cookie({'name': cook, 'value': cookies[cook]})
-        except:
-            pass
+        # try:
+        #     with open(f'cookies/{self.user_login}_cookies') as file:
+        #         self.cookies = json.load(file)
+        #     for cook in self.need_cookies:
+        #         self.browser.add_cookie({'name': cook, 'value': cookies[cook]})
+        # except:
+        #     pass
 
-        self.browser.find_element_by_xpath(
-            '/html/body/div[1]/section/main/div/article/div/div[1]/div/form/div/div[1]/div/label/input'
-        ).send_keys(self.user_login)
-        self.browser.find_element_by_xpath(
-            '/html/body/div[1]/section/main/div/article/div/div[1]/div/form/div/div[2]/div/label/input'
-        ).send_keys(self.user_password)
-        self.browser.find_element_by_xpath(
-            '/html/body/div[1]/section/main/div/article/div/div[1]/div/form/div/div[3]/button'
-        ).click()
+        input_fields = self.browser.find_elements_by_class_name('_2hvTZ')
+        submit_button = self.browser.find_element_by_class_name('L3NKy')
+
+        if input_fields:
+            # print('Input block')
+            input_fields[0].send_keys(self.user_login)
+            input_fields[1].send_keys(self.user_password)
+            submit_button.click()
+        else:
+            print('Xpath block')
+            self.browser.find_element_by_xpath(
+                '/html/body/div[1]/section/main/div/article/div/div[1]/div/form/div/div[1]/div/label/input'
+            ).send_keys(self.user_login)
+            self.browser.find_element_by_xpath(
+                '/html/body/div[1]/section/main/div/article/div/div[1]/div/form/div/div[2]/div/label/input'
+            ).send_keys(self.user_password)
+            self.browser.find_element_by_xpath(
+                '/html/body/div[1]/section/main/div/article/div/div[1]/div/form/div/div[3]/button'
+            ).click()
 
         time.sleep(4)
 
