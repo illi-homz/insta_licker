@@ -9,6 +9,8 @@ import db_objects as db
 
 from random import randint
 
+import settings
+
 
 class SeeStorris:
     def __init__(self, login, password, user_url):
@@ -336,22 +338,9 @@ class SeeStorris:
 
 
 if __name__ == '__main__':
-    user_login = 'nastya_pro_sugaring'
-    user_password = 'fufik123567chupachups'
-    client_url = 'https://www.instagram.com/nelli_cosmo/'
-
-    # user_login = 'illi_homz'
-    # user_password = 'badbalance166998'
-    # client_url = 'https://instagram.com/smile_shugar'
-
-    # user_login = 'diveev_studio'
-    # user_password = '999ASDfgh'
-    # client_url = 'https://instagram.com/domosdesign/'
+    user_login = settings.user_login
+    user_password = settings.user_password
+    client_url = settings.client_url
 
     storris = SeeStorris(user_login, user_password, client_url)
     storris.run()
-
-
-# кнопка кода класс: _5f5mN
-# поле ввода класс: _281Ls
-# Загрузка By4nA
