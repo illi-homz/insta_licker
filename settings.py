@@ -1,3 +1,3 @@
-user_login = 'nastya_pro_sugaring'
-user_password = 'fufik123567chupachups'
-client_url = 'https://www.instagram.com/nelli_cosmo/'
+user_login = 'some_login'
+user_password = 'login_password'
+client_url = 'https://www.instagram.com/<target_url>/'
