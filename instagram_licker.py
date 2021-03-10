@@ -133,7 +133,7 @@ class SeeStorris:
         # link_on_folowers = self.browser.find_element_by_xpath(
         # '/html/body/div[1]/section/main/div/header/section/ul/li[2]/a/span'
         # )
-        link_on_folowers = self.browser.find_elements_by_class_name('g47SY')
+        link_on_folowers = self.browser.find_elements_by_class_name('g47SY')[1]
         return int(link_on_folowers.get_attribute('title').replace(' ', '')) - 1
 
     def open_list_folowers(self):
