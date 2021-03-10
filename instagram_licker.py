@@ -130,16 +130,18 @@ class SeeStorris:
             return []
 
     def get_count_folowers(self):
-        link_on_folowers = self.browser.find_element_by_xpath(
-        '/html/body/div[1]/section/main/div/header/section/ul/li[2]/a/span'
-        )
+        # link_on_folowers = self.browser.find_element_by_xpath(
+        # '/html/body/div[1]/section/main/div/header/section/ul/li[2]/a/span'
+        # )
+        link_on_folowers = self.browser.find_elements_by_class_name('g47SY')
         return int(link_on_folowers.get_attribute('title').replace(' ', '')) - 1
 
     def open_list_folowers(self):
         # Открываю окно с подписчиками
-        self.link_on_folowers = self.browser.find_element_by_xpath(
-            '//section/main/div/header/section/ul/li[2]/a'
-        ).click()
+        # self.link_on_folowers = self.browser.find_element_by_xpath(
+        #     '//section/main/div/header/section/ul/li[2]/a'
+        # ).click()
+        self.browser.find_elements_by_class_name('-nal3')[1].click()
 
     def get_element(self):
         # return self.browser.find_element_by_xpath('/html/body/div[4]/div/div[2]')
